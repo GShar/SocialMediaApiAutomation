@@ -1,4 +1,4 @@
-Feature: Test feature add comments on Post
+Feature: Add comments on Post
   Background: As a user of the online social media platform,
     I should be able to add comments to posts
     This does not break existing feature that all comments for a post can still be successfully fetched
