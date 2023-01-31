@@ -1,44 +1,36 @@
 package StepDefinition;
 
-import DomainObjects.Posts;
-import io.cucumber.datatable.DataTable;
+import components.Posts;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
-public class RestApiPostStep {
+public class PostsStep {
     private Response response;
     Posts posts;
-
     @Before
     public void before() {
         posts = new Posts();
     }
 
-    @Given("I have a rest service which is available for endpoint {string}")
-    public void getUserPosts(String uri) throws URISyntaxException {
-        response = RestAssured.given().spec(posts.requestSpecification).get(new URI(uri));
+    @Given("I have a rest service endpoint for posts")
+    public void getUserPosts() throws URISyntaxException {
+        response = posts.getAllPosts();
         Assert.assertEquals(200, response.statusCode());
     }
-
-    @When("I create a post for user with body and title and userId")
-    public void responseIsStatusCode(DataTable dataTable) {
-        List<Map<String, String>> data = dataTable.asMaps();
-        response = posts.createPost(data);
+    @When("I create a post for user with body {string} and title {string} and userId {int}")
+    public void createAPostForUserWithBodyAndTitleAndUserId(String body, String title, int userId) {
+        response = posts.createPost(body, title, userId);
         Assert.assertEquals(201, response.statusCode());
     }
 
@@ -52,8 +44,8 @@ public class RestApiPostStep {
         response.then().assertThat().body("body", equalTo(body));
     }
 
-    @And("I verify that post endpoint response contains userId {string}")
-    public void verifyPostUserIdIs(String userId) {
+    @And("I verify that post endpoint response contains userId {int}")
+    public void verifyPostUserIdIs(int userId) {
         response.then().assertThat().body("userId", equalTo(userId));
     }
 
@@ -71,4 +63,5 @@ public class RestApiPostStep {
     public void verifyResponseTimeIsLessThanMilliseconds(long seconds) {
         response.then().assertThat().time(lessThan(seconds), TimeUnit.MILLISECONDS);
     }
+
 }

@@ -1,18 +1,17 @@
 Feature: Verify Get Posts in Api
 
   @EndToEnd
-  Scenario: Create a new posts
-    Given I have a rest service which is available for endpoint "/posts"
-    When I create a post for user with body and title and userId
-      |JsonKey | JsonValue        |
-      | title  | Testing Patterns |
-      | body   | testing          |
-      | userId | 1                |
-    Then I verify that post endpoint response contains title "Testing Patterns"
-    And I verify that post endpoint response contains body "testing"
-    And I verify that post endpoint response contains userId "1"
+  Scenario Outline: Create a new posts
+    Given I have a rest service endpoint for posts
+    When I create a post for user with body <body> and title <title> and userId 1
+    Then I verify that post endpoint response contains title <expectedTitle>
+    And I verify that post endpoint response contains body <expectedBody>
+    And I verify that post endpoint response contains userId 1
     And I verify post endpoint response header content type is Json
-    And I verify post endpoint response time is less than 1000 milliseconds
+    And I verify post endpoint response time is less than <seconds> milliseconds
+    Examples:
+      | uri      | title              | body      | seconds | expectedTitle         | expectedBody |
+      | "/posts" | "Testing Patterns" | "testing" | 1000    | "Testing Patterns"    | "testing"    |
 
    # Scenario: Get All the posts
 

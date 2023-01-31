@@ -20,6 +20,7 @@ public class User {
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("name")
+
     private String name;
     @JsonProperty("username")
     private String username;

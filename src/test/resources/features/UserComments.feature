@@ -1,5 +1,5 @@
 Feature: Verify Get Comments in Api
-  Scenario Outline: get all comments
+  Scenario: get all comments
     Given I have a rest service endpoint for comments
     When I get all comments on a post with postId "1"
     Then I verify total 5 comments are returned
@@ -9,9 +9,6 @@ Feature: Verify Get Comments in Api
     And I verify postId is 1 in all the comments
     And I verify comment with "Eliseo@gardner.biz" contains text "laudantium enim quasi est quidem magnam voluptate"
     And I verify list contains comment with name "id labore ex et quam laborum"
-    Examples:
-      | uri          |
-      | /comments    |
 
 
   @EndToEnd
