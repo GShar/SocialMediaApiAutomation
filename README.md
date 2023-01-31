@@ -1,13 +1,21 @@
 # SocialMediaApiAutomation
 This project is an api automation framework to test a social media platform
 
-### Prerequisites
+## Prerequisites
 
 Make sure you have Java installed.
 Also make sure you are using an editor with support for both gradle and Java.
 I have used the following:
 * Intellij Idea as the editor
 * Gradle as the build tool
+
+## Tools Used
+
+1. Rest Assured
+2. Java
+3. Cucumber for BDD
+4. Gradle Build Tool
+
 ## Running the tests
 
 Please follow the steps below to run the test suite:
