@@ -1,6 +1,5 @@
-Feature: Verify Get Posts in Api
+Feature: Make posts using the post endpoint
 
-  @EndToEnd
   Scenario Outline: Create a new posts
     Given I have a rest service endpoint for posts
     When I create a post for user with body <body> and title <title> and userId 1
@@ -10,14 +9,13 @@ Feature: Verify Get Posts in Api
     And I verify post endpoint response header content type is Json
     And I verify post endpoint response time is less than <seconds> milliseconds
     Examples:
-      | uri      | title              | body      | seconds | expectedTitle         | expectedBody |
-      | "/posts" | "Testing Patterns" | "testing" | 1000    | "Testing Patterns"    | "testing"    |
+      | title              | body                   | seconds | expectedTitle         | expectedBody           |
+      | "Testing Patterns" | "testing patterns in " | 1000    | "Testing Patterns"    | "testing patterns in " |
+      | "<<<<<<<<"         | "<<<<<<<<"             | 1000    | "<<<<<<<<"            | "<<<<<<<<"             |
+      | "test '''ment"     | "test '''ment"         | 1000    |  "test '''ment"       |  "test '''ment"        |
+      | "ambigüedad"       | "ambigüedad"           | 1000    |  "ambigüedad"         |  "ambigüedad"          |
+      | "test 是"          | "test 是"               | 1000    |  "test 是"            |  "test 是"             |
 
-   # Scenario: Get All the posts
-
-#    Scenario: As a user of the online socila media platform I would like to add a comment to my post
- #     When I create a post for  user {int} with body {string} and title {string}
-  #    And I add a comment to the post
 
 
 
