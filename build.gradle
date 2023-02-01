@@ -12,23 +12,16 @@ repositories {
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     implementation "io.cucumber:cucumber-java:7.2.3"
-
     implementation "io.cucumber:cucumber-junit:7.2.3"
     implementation "org.junit.vintage:junit-vintage-engine:5.7.0"
-
     implementation 'org.json:json:20160810'
     implementation 'io.rest-assured:rest-assured:4.5.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-
 }
 
 test {
     useJUnitPlatform()
 }
-configurations {
-    cucumberRuntime {
-        extendsFrom implementation
-    }
-}
+
